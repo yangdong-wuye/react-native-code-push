@@ -243,13 +243,15 @@ var AndroidEmulatorManager = (function () {
      */
     AndroidEmulatorManager.prototype.prepareEmulatorForTest = function (appId) {
         return this.endRunningApplication(appId)
-            .then(function () { return testUtil_1.TestUtil.getProcessOutput("adb shell pm clear " + appId); }).then(function () { return null; });
+            .then(function () { return testUtil_1.TestUtil.getProcessOutput("adb shell pm clear " + appId); }).then(function () { return null; })
+            .catch(function () { return null; });
     };
     /**
      * Uninstalls the app from the emulator.
      */
     AndroidEmulatorManager.prototype.uninstallApplication = function (appId) {
-        return testUtil_1.TestUtil.getProcessOutput("adb uninstall " + appId).then(function () { return null; });
+        return testUtil_1.TestUtil.getProcessOutput("adb uninstall " + appId).then(function () { return null; })
+            .catch(function () { return null; });
     };
     AndroidEmulatorManager.ANDROID_EMULATOR_OPTION_NAME = "--androidemu";
     AndroidEmulatorManager.DEFAULT_ANDROID_EMULATOR = "emulator";
@@ -377,13 +379,15 @@ var IOSEmulatorManager = (function () {
      * Prepares the emulator for a test.
      */
     IOSEmulatorManager.prototype.prepareEmulatorForTest = function (appId) {
-        return this.endRunningApplication(appId);
+        return this.endRunningApplication(appId)
+            .catch(function () { return null; });
     };
     /**
      * Uninstalls the app from the emulator.
      */
     IOSEmulatorManager.prototype.uninstallApplication = function (appId) {
-        return testUtil_1.TestUtil.getProcessOutput("xcrun simctl uninstall booted " + appId).then(function () { return null; });
+        return testUtil_1.TestUtil.getProcessOutput("xcrun simctl uninstall booted " + appId).then(function () { return null; })
+            .catch(function () { return null; });
     };
     IOSEmulatorManager.IOS_EMULATOR_OPTION_NAME = "--iosemu";
     return IOSEmulatorManager;

@@ -50,14 +50,17 @@ function initializeTests(projectManager, supportedTargetPlatforms, describeTests
             targetPlatforms.forEach(function (platform) {
                 promises.push(platform.getEmulatorManager().bootEmulator(TestConfig.restartEmulators));
             });
-            console.log("Building test project.");
-            // create the test project
+            console.log("Building test and update projects.");
             promises.push(createTestProject(TestConfig.testRunDirectory)
                 .then(function () {
-                console.log("Building update project.");
-                // create the update project
-                return createTestProject(TestConfig.updatesDirectory);
-            }).then(function () { return null; }));
+                console.log("Finished building test project.");
+                return null;
+            }));
+            promises.push(createTestProject(TestConfig.updatesDirectory)
+                .then(function () {
+                console.log("Finished building update project.");
+                return null;
+            }));
             Q.all(promises).then(function () { done(); }, function (error) { done(error); });
         });
     }
