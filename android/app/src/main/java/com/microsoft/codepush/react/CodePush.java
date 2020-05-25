@@ -130,7 +130,7 @@ public class CodePush implements ReactPackage {
             DevSupportManager devSupportManager = instanceManager.getDevSupportManager();
             if (devSupportManager != null) {
                 DevInternalSettings devInternalSettings = (DevInternalSettings)devSupportManager.getDevSettings();
-                isLiveReloadEnabled = devInternalSettings.isReloadOnJSChangeEnabled();
+                isLiveReloadEnabled = devInternalSettings.isHotModuleReplacementEnabled();
             }
         }
 
